@@ -2,8 +2,9 @@
 #include<cstdlib>
 #include<ctime>
 #include <locale>
+#include<cstring>
 using namespace std;
-int generarNumRandom(int minimo, int maximo) { // metodo para generar numeros al azar del 1 al 99
+int generarNumRandom(int minimo, int maximo) { // metodo para generar numeros al azar del 1 al 99 y del 97 al 122
 	int random;
 	random = 0;
 	random = minimo + (rand() % maximo);
@@ -75,17 +76,84 @@ void ejercicio_1() {
 	delete matriz;
 }
 void reservarMatriz(char**& matriz, int filas, int columnas) {
-
+	matriz = new char* [filas];
+	for (int i = 0; i < filas; i++)
+	{
+		matriz[i] = new char[columnas];
+	}
 }
 void llenarMatriz(char**& matriz, int filas, int columnas) {
-
+	reservarMatriz(matriz, filas, columnas);
+	for (int i = 0; i < filas; i++)
+	{
+		for (int j = 0; j < columnas; j++)
+		{
+			matriz[i][j] = char(generarNumRandom(97, 26));
+		}
+	}
 }
 void imprimirMatriz(char**& matriz, int filas, int columnas) {
-
+	llenarMatriz(matriz, filas, columnas);
+	for (int i = 0; i < filas; i++)
+	{
+		cout << "[ ";
+		for (int j = 0; j < columnas; j++)
+		{
+			cout << matriz[i][j] << " ";
+		}
+		cout << " ]" << endl;
+	}
+}
+void buscarPalabra(char**& matriz, int filas, int columnas, char palabraBuscada[]) {
+	bool fraseEncontrada = false;
+	for (int i = 0; i < filas; i++)
+	{
+		for (int j = 0; j < columnas; j++)
+		{
+			if (strstr(matriz[i], palabraBuscada))
+			{
+				if (strstr(matriz[j],palabraBuscada))
+				{
+					fraseEncontrada = true;
+				}
+			}
+			else {
+				fraseEncontrada = false;
+			}
+		}
+	}
+	if (fraseEncontrada)
+	{
+		cout << "La palabra " << palabraBuscada << " SI se encuentra en la sopa de letras" << endl;
+	}
+	else {
+		cout << "La palabra " << palabraBuscada << " NO se encuentra en la sopa de letras" << endl;
+	}
 }
 void ejercicio_2() {
 	int fila = 0;
 	int columna = 0;
+	char palabraBuscada[80];
+	char** matriz = nullptr;
+	cout << "Ingrese el numero de filas: "; cin >> fila;
+	cout << endl;
+	while (fila < 4) {
+		cout << "Ingrese un numero de filas mayor o igual que 4: "; cin >> fila;
+		cout << endl;
+	}
+	cout << "Ingrese el numero de columnas: "; cin >> columna;
+	cout << endl;
+	while (columna < 4) {
+		cout << "Ingrese un numero de filas mayor o igual que 4: "; cin >> fila;
+		cout << endl;
+	}
+	imprimirMatriz(matriz, fila, columna);
+	cout << endl;
+	cout << "Ingrese la palabra a buscar en la sopa de letras: "; 
+	cin.getline(palabraBuscada, 80, '\n');
+	cout << endl;
+	/*buscarPalabra(matriz, fila, columna, palabraBuscada);
+	cout << endl;*/
 }
 void menu() {
 	bool menu = true;
