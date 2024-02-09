@@ -3,6 +3,7 @@
 #include<ctime>
 #include <locale>
 #include<cstring>
+#include <string>
 using namespace std;
 int generarNumRandom(int minimo, int maximo) { // metodo para generar numeros al azar del 1 al 99 y del 97 al 122
 	int random;
@@ -104,22 +105,14 @@ void imprimirMatriz(char**& matriz, int filas, int columnas) {
 		cout << " ]" << endl;
 	}
 }
-void buscarPalabra(char**& matriz, int filas, int columnas, char palabraBuscada[]) {
+void buscarPalabra(char**& matriz, int filas, int columnas, string palabraBuscada) {
 	bool fraseEncontrada = false;
 	for (int i = 0; i < filas; i++)
 	{
+		string temporal = "";
 		for (int j = 0; j < columnas; j++)
 		{
-			if (strstr(matriz[i], palabraBuscada))
-			{
-				if (strstr(matriz[j],palabraBuscada))
-				{
-					fraseEncontrada = true;
-				}
-			}
-			else {
-				fraseEncontrada = false;
-			}
+			temporal += matriz[i][j];
 		}
 	}
 	if (fraseEncontrada)
@@ -133,7 +126,7 @@ void buscarPalabra(char**& matriz, int filas, int columnas, char palabraBuscada[
 void ejercicio_2() {
 	int fila = 0;
 	int columna = 0;
-	char palabraBuscada[80];
+	string palabraBuscada = "";
 	char** matriz = nullptr;
 	cout << "Ingrese el numero de filas: "; cin >> fila;
 	cout << endl;
@@ -149,11 +142,12 @@ void ejercicio_2() {
 	}
 	imprimirMatriz(matriz, fila, columna);
 	cout << endl;
-	cout << "Ingrese la palabra a buscar en la sopa de letras: "; 
-	cin.getline(palabraBuscada, 80, '\n');
+	cout << "Ingrese la palabra a buscar en la sopa de letras: "; cin >> palabraBuscada;
 	cout << endl;
-	/*buscarPalabra(matriz, fila, columna, palabraBuscada);
-	cout << endl;*/
+	
+	
+	buscarPalabra(matriz, fila, columna, palabraBuscada);
+	cout << endl;
 }
 void menu() {
 	bool menu = true;
