@@ -45,18 +45,47 @@ int calcularInversaMatematica(int**& matriz, int tamano) {
 			{
 				sumaDiagonal += matriz[i][j];
 			}
+			if (j == (tamano - 1) - i)
+			{
+				sumaDiagonal += matriz[i][j];
+			}
 		}
 	}
+	return sumaDiagonal;
 }
 void ejercicio_1() {
 	int** matriz = nullptr;
 	int tamano = 0;
+	int totalSumaDiagonal = 0;
 	cout << "Ingrese n: "; cin >> tamano;
 	cout << endl;
+
+	while (tamano <= 2) {
+		cout << "Debe ser un valor de n mayor o igual a 3: "; cin >> tamano;
+		cout << endl;
+	}
 	llenarMatrizEnteros(matriz, tamano);
+	totalSumaDiagonal = calcularInversaMatematica(matriz, tamano);
+	cout << "La suma de la diagonal regular y la inversa es: " << totalSumaDiagonal << endl;
+
+	for (int i = 0; i < tamano; i++)
+	{
+		delete[] matriz[i];
+	}
+	delete matriz;
+}
+void reservarMatriz(char**& matriz, int filas, int columnas) {
+
+}
+void llenarMatriz(char**& matriz, int filas, int columnas) {
+
+}
+void imprimirMatriz(char**& matriz, int filas, int columnas) {
+
 }
 void ejercicio_2() {
-
+	int fila = 0;
+	int columna = 0;
 }
 void menu() {
 	bool menu = true;
